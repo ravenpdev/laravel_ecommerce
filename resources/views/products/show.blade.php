@@ -4,7 +4,7 @@
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                 <div class="grid grid-cols-2 gap-4 border-b border-gray-200 bg-white p-6">
                     <div class="col-span-1 grid">
-                        Image gallery
+                        <livewire:product-images :product="$product" />
                     </div>
                     <div class="col-span-1 space-y-6 p-6">
                         <div>
