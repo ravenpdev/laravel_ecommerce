@@ -32,4 +32,10 @@ class Product extends Model implements HasMedia
     {
         return $this->hasMany(Variation::class);
     }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('default')
+            ->useFallbackUrl(url('/storage/no_image_available.png'));
+    }
 }
