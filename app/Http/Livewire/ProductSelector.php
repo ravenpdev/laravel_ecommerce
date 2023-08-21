@@ -4,15 +4,19 @@ namespace App\Http\Livewire;
 
 use App\Models\Product;
 use App\Models\Variation;
+use App\Services\Cart\CartService;
 use Livewire\Component;
 
 class ProductSelector extends Component
 {
     public Product $product;
 
+    /**
+    * @var \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<array-key, \App\Models\Variation>|null $initialVariations
+    */
     public $initialVariations;
 
-    public $skuVariant;
+    public ?Variation $skuVariant;
 
     protected $listeners = [
         'skuVariantSelected'
@@ -33,9 +37,9 @@ class ProductSelector extends Component
         $this->skuVariant = Variation::find($variantId);
     }
 
-    public function addToCart()
+    public function addToCart(CartService $cartService)
     {
-        dd($this->skuVariant);
+        $cartService->add($this->skuVariant, 1);
     }
 
     public function render()

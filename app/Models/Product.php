@@ -21,16 +21,16 @@ class Product extends Model implements HasMedia
         return money($this->price);
     }
 
+    public function variations(): HasMany
+    {
+        return $this->hasMany(Variation::class);
+    }
+
     public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumbnail200x200')
             ->fit(Manipulations::FIT_CROP, 200, 200)
             ->nonQueued();
-    }
-
-    public function variations(): HasMany
-    {
-        return $this->hasMany(Variation::class);
     }
 
     public function registerMediaCollections(): void

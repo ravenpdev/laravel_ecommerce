@@ -12,6 +12,30 @@
 
 namespace App\Models{
 /**
+ * App\Models\Cart
+ *
+ * @property int $id
+ * @property string $uuid
+ * @property int|null $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User|null $user
+ * @property-read \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, \App\Models\Variation> $variations
+ * @property-read int|null $variations_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Cart newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cart newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cart query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cart whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cart whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cart whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cart whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cart whereUuid($value)
+ */
+	class Cart extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Category
  *
  * @property int $id
@@ -81,6 +105,8 @@ namespace App\Models{
  * @property string|null $live_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
+ * @property-read int|null $media_count
  * @property-read \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection<int, \App\Models\Variation> $variations
  * @property-read int|null $variations_count
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
@@ -95,7 +121,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
  */
-	class Product extends \Eloquent {}
+	class Product extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
 
 namespace App\Models{
@@ -103,7 +129,7 @@ namespace App\Models{
  * App\Models\Stock
  *
  * @property int $id
- * @property int $variantion_id
+ * @property int $variation_id
  * @property int $amount
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -115,7 +141,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Stock whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Stock whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Stock whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Stock whereVariantionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stock whereVariationId($value)
  */
 	class Stock extends \Eloquent {}
 }
@@ -168,10 +194,12 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Variation[] $children
  * @property-read int|null $children_count
+ * @property-read \Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media> $media
+ * @property-read int|null $media_count
  * @property-read Variation|null $parent
  * @property-read \App\Models\Product $product
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Stock> $stocs
- * @property-read int|null $stocs_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Stock> $stocks
+ * @property-read int|null $stocks_count
  * @property-read \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Variation[] $ancestors The model's recursive parents.
  * @property-read int|null $ancestors_count
  * @property-read \Staudenmeir\LaravelAdjacencyList\Eloquent\Collection|Variation[] $ancestorsAndSelf The model's recursive parents and itself.
@@ -219,6 +247,6 @@ namespace App\Models{
  * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Builder|Variation withGlobalScopes(array $scopes)
  * @method static \Staudenmeir\LaravelAdjacencyList\Eloquent\Builder|Variation withRelationshipExpression($direction, callable $constraint, $initialDepth, $from = null, $maxDepth = null)
  */
-	class Variation extends \Eloquent {}
+	class Variation extends \Eloquent implements \Spatie\MediaLibrary\HasMedia {}
 }
 
